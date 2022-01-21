@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}s'inscrire!
+{% endblock %}
+
+{% block body %}
+<div class="container flex-collum">
+    
+{{ form_start(form) }}
+
+    <div class="form-group">
+        {{ form_row(form.email, { 'attr': {'class': 'form-control input'}})}}     
+    </div>
+    <div class="form-group">
+        {{ form_row(form.password, { 'attr': {'class': 'form-control input'}})}}
+    </div>
+
+    {{ form_row(form.save, { 'attr': {'class': 'button'}})}}
+{{ form_end(form) }}
+</div>
+{% endblock %}

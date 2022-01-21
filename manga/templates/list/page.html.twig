@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Manga{% endblock %}
+
+{% block body %}
+
+<h1> Liste de manga </h1>
+ <table class="table">
+<thead>
+<th>nom</th>
+<th>tome</th>
+<th>auteur</th>
+<th>magasin</th>
+</thead>
+<tbody> 
+{% for manga in mangas %}
+    <tr>
+        <td> {{ manga.NomManga}} </td>
+        <td> {{ manga.tome }}</td>
+        <td> {% for auteur in manga.auteur %}
+         {{ auteur.nom }}<br>
+        {% endfor %}</td>
+        <td> {% for magasin in manga.Magasin %}
+         {{ magasin.id }} <br>
+        {% endfor %}</td>
+       
+{% else %}
+<tr>
+ <td colspan=4>  Il n'y a pas de manga </td>
+ {% endfor %}
+
+
+    <a href=""#"">back to list</a>
+
+    <a href="#">edit</a>
+
+    {{ include('etudiant/_delete_form.html.twig') }}
+{% endblock %}

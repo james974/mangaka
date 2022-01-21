@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Manga index
+{% endblock %}
+
+{% block body %}
+
+	<div class="container flex-collum">
+		<div class="show-result">
+			<h1>Resultats</h1>
+			{% if mangas|length > 0 %}
+				<div class="table-container" role='table' aria-label="Résultats">
+					<div class="flex-table header" role="rowgroup">
+						<div class="flex-row first" role="collumnheader">Titre</div>
+						<div class="flex-row" role="collumnheader">Tome</div>
+						<div class="flex-row" role="collumnheader">Auteur</div>
+						<div class="flex-row" role="collumnheader">Magasin</div>
+						<div class="flex-row" role="collumnheader">Action</div>
+					</div>
+					{% for manga in mangas %}
+						<div class="flex-table row" role="rowgroup">
+
+							<div class="flex-row first" role="cell">
+								{{ manga.NomManga }}
+							</div>
+							<div class="flex-row" role="cell">
+								{{ manga.tome }}
+							</div>
+							<div class="flex-row" role="cell">
+								{% for auteur in manga.auteur %}
+									{{ auteur.nom }}
+									|
+								{% endfor %}
+							</div>
+							<div class="flex-row" role="cell">
+								{% for magasin in manga.Magasin %}
+									{{ magasin.id }}
+									|
+								{% endfor %}
+							</div>
+							<div class="flex-row" role="cell">
+								<a href="{{ path('manga_show', {'id': manga.id}) }}">Voir</a>
+								{% if is_granted('ROLE_ADMIN') %}
+									<a href="{{ path('manga_edit', {'id': manga.id}) }}">Editer</a>
+                                    <!-- AJOUTER BOUTON SUPPROMER ? -->
+								{% endif %}
+							</div>
+						</div>
+					{% endfor %}
+				</div>
+			{% else %}
+				<h2>Il n'y as pas de manga pour le moment. Désolé.</h2>
+			{% endif %}
+			{% if is_granted('ROLE_ADMIN') %}
+				<a href="{{ path('manga_new') }}" class="inline-link">Ajouter un manga
+				</a>
+			{% endif %}
+		</div>
+	</div>
+
+{% endblock %}

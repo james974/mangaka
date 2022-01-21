@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste de manga{% endblock %}
+
+{% block body %}
+
+<h1> Liste de manga </h1>
+ <table class="table">
+<thead>
+<th>nom</th>
+<th>tome</th>
+<th>auteur</th>
+<th>magasin</th>
+<th>action</th>
+</thead>
+<tbody> 
+{% for manga in mangas %}
+    <tr>
+        <td> {{ manga.NomManga}} </td>
+        <td> {{ manga.tome }}</td>
+        <td> {% for auteur in manga.auteur %}
+         {{ auteur.nom }}<br>
+        {% endfor %}</td>
+        <td> {% for magasin in manga.Magasin %}
+         {{ magasin.id }} <br>
+        {% endfor %}</td>
+         <td>
+                    <a href="{{ path('manga_show', {'id': manga.id}) }}">show</a>
+                    <a href="{{ path('manga_edit', {'id': manga.id}) }}">edit</a>
+        </td>
+    </tr>
+{% else %}
+<tr>
+ <td colspan=4>  Il n'y a pas de manga </td>
+</tr>
+ {% endfor %}
+</tbody>
+</table>
+<a href="{{ path('etudiant_new') }}">Ajouter un manga </a>
+{% endblock %}

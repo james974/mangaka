@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Manga
+{% endblock %}
+
+{% block body %}
+
+	<div class="container flex-collum desk-flex-collum">
+		<h1>Fiche -
+			{{ manga.NomManga }}</h1>
+		<div class="infos">
+			<p class="info">
+				<span class="tag">Nom de l'oeuvre:</span>
+				{{ manga.NomManga }}
+			</p>
+			<p class="info">
+				<span class="tag">Tome:</span>
+				{{ manga.tome }}
+			</p>
+			<p class="info">
+				<span class="tag">Auteur:</span>
+				{% for auteur in manga.auteur %}
+					{{ auteur.nom }}
+				{% endfor %}
+			</p>
+			<p class="info">
+				<span class="tag">Magasin:</span>
+				{% for magasin in manga.Magasin %}
+					{{ magasin.id }}
+				{% endfor %}
+			</p>
+
+            <div class="buttons flex-collum">
+                <div class="button bg-green"><a href="{{ path('manga_edit', {'id': manga.id}) }}">Modifier</a></div>
+                <div class="button bg-red"><a href="{{ path('manga_delete', {'id': manga.id}) }}">Supprimer</a></div>
+                <div class="button"><a href="{{ path('manga_index') }}">Retour</a></div>
+            </div>
+		</div>
+	</div>
+
+{% endblock %}
